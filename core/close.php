@@ -6,4 +6,4 @@
  * 
  */
 
- $conn = null;
+ unset($conn);

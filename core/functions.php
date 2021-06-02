@@ -13,7 +13,7 @@
   * @param string $format
   * @return string
   */
-  function formated_date(string $date, string $format = DATE_FORMAT) :string {
-    $date = new DateTime($date);
-    return $date->format($format);
-}
+ function formated_date(string $date, string $format = DATE_FORMAT) :string {
+     $date = new DateTime($date);
+     return $date->format($format);
+ }

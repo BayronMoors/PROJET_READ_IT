@@ -10,6 +10,10 @@
     include_once "../app/controllers/postsController.php";
     showAction($conn,$_GET['postID'] );
  }
+ else if(isset($_GET['tagID'])){
+   include_once "../app/controllers/postsController.php";
+   indexByTagAction($conn,$_GET['tagID'] );
+ }
  else if(isset($_GET['contact'])){
     include_once "../app/controllers/postsController.php";
     contactAction();

@@ -1,4 +1,10 @@
 <?php
+namespace App\Controller\PostsController;
+use App\Model\AuthorModel;
+use App\Model\TagsModel;
+use App\Model\CommentsModel;
+use App\Model\PostsModel;
+
 
 /**
  * 
@@ -9,12 +15,12 @@
  /**
   * indexAction
   *
-  * @param PDO $conn
+  * @param \PDO $conn
   * @return void
   */
- function indexAction(PDO $conn){
+ function indexAction(\PDO $conn){
     include_once "../app/models/postsModel.php";
-    $posts = findAll($conn);
+    $posts = PostsModel\findAll($conn);
 
 
     GLOBAL $content;
@@ -26,22 +32,22 @@
  /**
   * showAction
   *
-  * @param PDO $conn
+  * @param \PDO $conn
   * @param integer $id
   * @return void
   */
- function showAction(PDO $conn, int $id){
+ function showAction(\PDO $conn, int $id){
    include_once "../app/models/postsModel.php";
-   $post = getOneById($conn, $id);
+   $post = PostsModel\findOneById($conn, $id);
 
    include_once "../app/models/tagsModel.php";
-   $tags = findAllByPostId($conn, $id);
+   $tags = TagsModel\findAllByPostId($conn, $id);
 
    include_once "../app/models/authorModel.php";
-   $author = getAuthorByPostId($conn, $id);
+   $author = AuthorModel\findOneById($conn, $post['author_id']);
 
    include_once "../app/models/commentsModel.php";
-   $comments = getCommentsByPostId($conn, $id);
+   $comments = CommentsModel\findAllByPostId($conn, $id);
 
    GLOBAL $content;
    ob_start();
@@ -64,13 +70,13 @@
 /**
  * indexByTagAction
  *
- * @param PDO $conn
+ * @param \PDO $conn
  * @param integer $id
  * @return void
  */
- function indexByTagAction(PDO $conn, int $id){
+ function indexByTagAction(\PDO $conn, int $id){
   include_once "../app/models/postsModel.php";
-  $posts = findByTagId($conn, $id);
+  $posts = PostsModel\findByTagId($conn, $id);
 
 
   GLOBAL $content;

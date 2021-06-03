@@ -1,4 +1,5 @@
 <?php
+namespace App\Model\CommentsModel;
 
 /**
  * 
@@ -6,15 +7,15 @@
  * 
  */
 
-function getCommentsByPostId(PDO $conn, int $id): array
+function findAllByPostId(\PDO $conn, int $id): array
 {
-    $sql = "SELECT c.id, c.pseudo, c.content, c.created_at
-            FROM comments c
-            JOIN posts p ON p.id = c.post_id
-            WHERE c.post_id = :id;";
+    $sql = "SELECT *
+            FROM comments 
+            WHERE post_id = :id
+            ORDER BY created_at DESC;";
 
     $rs = $conn->prepare($sql);
-    $rs->bindValue(":id", $id, PDO::PARAM_INT);
+    $rs->bindValue(":id", $id, \PDO::PARAM_INT);
     $rs->execute();
-    return $rs->fetchAll(PDO::FETCH_ASSOC);
+    return $rs->fetchAll(\PDO::FETCH_ASSOC);
 }

@@ -13,7 +13,10 @@
   * @param string $format
   * @return string
   */
+
+  namespace Core\Functions;
+
  function formated_date(string $date, string $format = DATE_FORMAT) :string {
-     $date = new DateTime($date);
+     $date = new \DateTime($date);
      return $date->format($format);
  }

@@ -1,4 +1,5 @@
 <?php
+namespace App\Model\TagsModel;
 
 /**
  * 
@@ -6,7 +7,7 @@
  * 
  */
 
-function findAllByPostId(PDO $conn, int $id):array
+function findAllByPostId(\PDO $conn, int $id):array
 {
     $sql = "SELECT *
             FROM tags t
@@ -14,7 +15,7 @@ function findAllByPostId(PDO $conn, int $id):array
             WHERE pht.post_id = :id;";
 
     $rs = $conn->prepare($sql);
-    $rs->bindValue(":id", $id, PDO::PARAM_INT);
+    $rs->bindValue(":id", $id, \PDO::PARAM_INT);
     $rs->execute();
-    return $rs->fetchAll(PDO::FETCH_ASSOC);
+    return $rs->fetchAll(\PDO::FETCH_ASSOC);
 }

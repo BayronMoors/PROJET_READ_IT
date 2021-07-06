@@ -4,6 +4,7 @@ use App\Model\AuthorModel;
 use App\Model\TagsModel;
 use App\Model\CommentsModel;
 use App\Model\PostsModel;
+use App\Model\SearchModel;
 
 
 /**
@@ -84,3 +85,20 @@ use App\Model\PostsModel;
   include "../app/views/posts/index.php";
   $content = ob_get_clean();
  }
+
+/**
+ * searchAction
+ *
+ * @param \PDO $conn
+ * @param string $content
+ * @return void
+ */
+ function searchAction(\PDO $conn, string $content) {
+  require_once '../app/models/searchModel.php';
+  $posts = SearchModel\findAll($conn, $content);
+
+  GLOBAL $content;
+  ob_start();
+  include '../app/views/posts/index.php';
+  $content = ob_get_clean();
+}

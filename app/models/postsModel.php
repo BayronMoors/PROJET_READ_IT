@@ -13,12 +13,14 @@ namespace App\Model\PostsModel;
   * @param PDO $conn
   * @return array
   */
- function findAll(\PDO $conn) :array {
+ function findAll(\PDO $conn, int $limit = 9) :array {
     $sql="SELECT *
           FROM posts
           ORDER BY created_at DESC
-          LIMIT 9;";
-    $rs = $conn->query($sql);
+          LIMIT :limit;";
+    $rs = $conn->prepare($sql);
+    $rs->bindValue(':limit', $limit, \PDO::PARAM_INT);
+    $rs->execute();
     return $rs->fetchAll(\PDO::FETCH_ASSOC);    
 }
 

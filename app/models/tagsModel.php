@@ -7,6 +7,15 @@ namespace App\Model\TagsModel;
  * 
  */
 
+function findAll(\PDO $conn) :array{
+    $sql = "SELECT *
+    FROM tags
+    ORDER BY name ASC";
+
+$rs = $conn->query($sql);
+return $rs->fetchAll(\PDO::FETCH_ASSOC);
+}
+
 function findAllByPostId(\PDO $conn, int $id):array
 {
     $sql = "SELECT *
